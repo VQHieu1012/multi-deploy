@@ -13,4 +13,11 @@ after_success:
   - docker build -t qhieu/multi-nginx ./nginx
   - docker build -t qhieu/multi-server ./server
   - docker build -t qhieu/multi-worker ./worker
-  
+
+  # log to docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin 
+  - docker push qhieu/multi-client
+  - docker push qhieu/multi-worker
+  - docker push qhieu/multi-server
+  - docker push qhieu/multi-nginx
+
