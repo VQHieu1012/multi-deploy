@@ -1,0 +1,16 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t qhieu/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run qhieu/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t qhieu/multi-client ./client
+  - docker build -t qhieu/multi-nginx ./nginx
+  - docker build -t qhieu/multi-server ./server
+  - docker build -t qhieu/multi-worker ./worker
+  
