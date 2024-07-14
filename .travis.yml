@@ -6,7 +6,9 @@ before_install:
   - docker build -t qhieu/react-test -f ./client/Dockerfile.dev ./client
 
 script:
+  - echo "run test"
   - docker run qhieu/react-test npm test -- --coverage
+  - echo "Success"
 
 after_success:
   - echo "Hello world"
