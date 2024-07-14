@@ -9,12 +9,14 @@ script:
   - docker run qhieu/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t qhieu/multi-client -f ./client/Dockerfile.dev ./client
-  - docker build -t qhieu/multi-nginx -f ./nginx/Dockerfile.dev ./nginx
-  - docker build -t qhieu/multi-server -f ./server/Dockerfile.dev ./server
-  - docker build -t qhieu/multi-worker -f c/worker/Dockerfile.dev ./worker
+  - echo "Hello world"
+  - docker build -t qhieu/multi-client ./client
+  - docker build -t qhieu/multi-nginx ./nginx
+  - docker build -t qhieu/multi-server ./server
+  - docker build -t qhieu/multi-worker ./worker
 
   # log to docker CLI
+  - echo "Log to CLI"
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin 
   - docker push qhieu/multi-client
   - docker push qhieu/multi-worker
